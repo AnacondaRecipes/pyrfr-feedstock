@@ -37,7 +37,7 @@ test:
 about:
   home: https://pypi.org/project/pyrfr/
   license: BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND JSON AND MIT
-  license_family: BSD AND OTHER
+  license_family: BSD
   license_file:
     - include/cereal/external/rapidxml/license.txt
     - LICENSE_cereal-1.2.2
