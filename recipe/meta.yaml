@@ -1,6 +1,5 @@
 {% set name = "pyrfr" %}
-{% set version = "0.9.0" %}
-
+{% set version = "0.8.3" %}
 
 package:
   name: {{ name|lower }}
@@ -8,22 +7,22 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bc6e758317cf79579fe6b7ce5f01dd42f77c991bf707e33646e8c6a9112c186b
+  sha256: cdc92b6054a351b85cc7496a2fc86e3192a9d04a92fd6bfa4aa629af360a6d1d
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . -vv
-
+  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+        skip: True  # [py<37]
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - doxygen
-    - swig >3.0.3
+    - swig >3.0.0
   host:
     - pip
     - python
+    - setuptools
+    - wheel
   run:
     - python
 
@@ -38,6 +37,7 @@ test:
 about:
   home: https://pypi.org/project/pyrfr/
   license: BSD-2-Clause AND BSD-3-Clause AND BSL-1.0 AND JSON AND MIT
+  license_family: BSD
   license_file:
     - include/cereal/external/rapidxml/license.txt
     - LICENSE_cereal-1.2.2
@@ -45,8 +45,10 @@ about:
     - LICENSE.txt
     - LICENSE_rapidjson
     - LICENSE_rapidxml
-  summary: A extensible C++ library for random forests with Python bindings.
+  summary: An extensible C++ library for random forests with Python bindings.
+  description: An extensible C++ library for random forests with Python bindings with a BSD3 license.
   dev_url: https://github.com/automl/random_forest_run
+  doc_url: https://automl.github.io/random_forest_run/
 
 extra:
   recipe-maintainers:
